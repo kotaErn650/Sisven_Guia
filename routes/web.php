@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ComunaController;
 use App\Http\Controllers\UsuarioController;
@@ -67,5 +69,11 @@ Route::get('/pais/new', [PaisController::class, 'create'])->name('pais.new');
 Route::delete('/pais/{pais}', [PaisController::class, 'destroy'])->name('pais.destroy');
 Route::put('/pais/{pais}', [PaisController::class, 'update'])->name('pais.update');
 Route::get('/pais/{pais}/edit', [PaisController::class, 'edit'])->name('pais.edit');
+
+
+//Ruta de categories
+Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
+Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
+Route::get('/categories/create', [CategoriesController::class, 'create'])->name('categories.create');
 
 require __DIR__.'/auth.php';
