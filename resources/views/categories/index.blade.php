@@ -7,63 +7,65 @@
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-md sm:rounded-lg p-6">
+            <div class="bg-white shadow-lg sm:rounded-lg p-6">
+                
                 <!-- Barra de navegación -->
-                <div class="flex justify-start gap-4 mb-6">
-                    <a href="{{ url('/profile') }}" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
-                        Ir a Perfil
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <a href="{{ url('/profile') }}" class=" font-semibold py-2 px-4 rounded shadow">
+                        Ir a Perfil 🧑‍💼
                     </a>
-                    <a href="{{ url('/comunas') }}" class="bg-slate-600 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded">
-                        Ir a Comunas
+                    <a href="{{ url('/comunas') }}" class="  font-semibold py-2 px-4 rounded shadow">
+                        Ir a Comunas 🌐
                     </a>
                 </div>
 
-                <!-- Título y botón crear -->
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-bold text-gray-700">Listado de Categorías</h3>
-                    <a href="{{ route('categories.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">
+                <!-- Encabezado y botón -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Listado de Categorías</h3>
+                    <a href="{{ route('categories.create') }}" class="mt-2 sm:mt-0 bg-blue-600 hover:bg-blue-700font-medium py-2 px-4 rounded shadow">
                         + Nueva Categoría
                     </a>
                 </div>
 
-                <!-- Tabla -->
+                <!-- Tabla de Categorías -->
                 <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white border border-gray-200">
-                        <thead class="bg-gray-100 text-gray-700">
+                    <table class="min-w-full text-sm text-left border border-gray-100">
+                        <thead class="bg-gray-100 text-gray-700 uppercase">
                             <tr>
-                                <th class="py-2 px-4 border-b">ID</th>
-                                <th class="py-2 px-4 border-b">Nombre</th>
-                                <th class="py-2 px-4 border-b">Acciones</th>
+                                <th class="py-3 px-4 border-b">ID</th>
+                                <th class="py-3 px-4 border-b">Nombre</th>
+                                <th class="py-3 px-4 border-b text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($categories as $category)
+                            @forelse($categories as $category)
                                 <tr class="hover:bg-gray-50">
                                     <td class="py-2 px-4 border-b">{{ $category->id }}</td>
                                     <td class="py-2 px-4 border-b">{{ $category->name }}</td>
-                                    <td class="py-2 px-4 border-b flex gap-2">
-                                        <a href="{{ route('categories.edit', $category->id) }}" class="text-indigo-600 hover:underline">Editar</a>
-                                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('¿Deseas eliminar esta categoría?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:underline">Eliminar</button>
-                                        </form>
+                                    <td class="py-2 px-4 border-b text-center">
+                                        <div class="flex justify-center gap-2">
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="text-blue-600 hover:underline font-medium">
+                                                Editar
+                                            </a>
+                                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('¿Deseas eliminar esta categoría?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:underline font-medium">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
-                            @endforeach
-                            @if($categories->isEmpty())
+                            @empty
                                 <tr>
-                                    <td colspan="3" class="text-center py-4 text-gray-500">No hay categorías registradas.</td>
+                                    <td colspan="3" class="py-4 text-center text-gray-500">
+                                        No hay categorías registradas.
+                                    </td>
                                 </tr>
-                            @endif
+                            @endforelse
                         </tbody>
                     </table>
-                    <div class="mt-4">
-                        <a href="{{ route('categories.create') }}" class="btn btn-primary">
-                            + Crear Nueva Categoría
-                        </a>
-                    </div>
-
                 </div>
 
             </div>

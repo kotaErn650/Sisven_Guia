@@ -19,9 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('categories', CategoriesController::class);
-    Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
-    Route::get('/categories/create', [CategoriesController::class, 'create'])->name('categories.create');
-
+    
     Route::resource('comunas', ComunaController::class);
     Route::get('/comunas', [ComunaController::class, 'index'])->name('comunas.index');
 
