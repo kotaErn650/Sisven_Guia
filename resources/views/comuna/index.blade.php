@@ -12,10 +12,10 @@
                 <!-- Barra de navegación -->
                 <div class="flex justify-between items-center bg-slate-600 p-4 rounded-md mb-6">
                 <div class="flex gap-2">
-                    <button onclick="window.location.href='{{ url('/profile') }}'" class="bg-green-600 hover:bg-green-700 text-black font-semibold py-2 px-4 rounded">
+                    <button onclick="window.location.href='{{ url('/profile') }}'" class="btn btn-sm btn-info me-1">
                         Ir a Perfil 🥸
                     </button>
-                    <button onclick="window.location.href='{{ url('/categories') }}'" class="bg-slate-800 hover:bg-slate-700 text-black font-semibold py-2 px-4 rounded">
+                    <button onclick="window.location.href='{{ url('/categories') }}'" class="btn btn-sm btn-info me-1">
                         Ir a Categories 🏴
                     </button>
                     </div>

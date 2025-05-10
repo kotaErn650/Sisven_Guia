@@ -14,7 +14,7 @@
                     <a href="{{ url('/profile') }}" class=" font-semibold py-2 px-4 rounded shadow">
                         Ir a Perfil 🧑‍💼
                     </a>
-                    <a href="{{ url('/comunas') }}" class="  font-semibold py-2 px-4 rounded shadow">
+                    <a href="{{ url('/comunas') }}" class="  font-semibold py-2 px-4 rounded shadow ">
                         Ir a Comunas 🌐
                     </a>
                 </div>
