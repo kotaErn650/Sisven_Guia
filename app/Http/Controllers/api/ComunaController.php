@@ -4,67 +4,73 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comuna;
-use Illuminate\Http\Request;
 use Illuminate\Support\facades\DB;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ComunaController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $comunas = DB::table('tb_comuna')
             ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
             ->select('tb_comuna.comu_codi', 'tb_comuna.comu_nomb', 'tb_municipio.muni_nomb')
             ->get();
-        return response()->json($comunas);
+
+        return json_encode(['comunas'=>$comunas]);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $comuna = Comuna::create([
-            'comu_nomb' => $request->name,
-            'muni_codi' => $request->code,
-        ]);
+        $comuna = new Comuna();
+        $comuna->comu_nomb = $request->name;
+        $comuna->muni_codi = $request->muni_codi;
+        $comuna->save();
+        return json_encode(['comuna'=>$comuna]);
 
-        return response()->json($comuna, 201);
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function show($id)
     {
         $comuna = Comuna::find($id);
-
-        if (!$comuna) {
-            return response()->json(['message' => 'Comuna no encontrada'], 404);
-        }
-
-        return response()->json($comuna);
+        $municipios = DB::table('tb_municipio')
+        ->ordeBy('muni_nomb')
+        ->get ();
+        return json_encode(['comuna'=>$comuna, 'municiopios'=>$municipios]);
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, $id)
     {
         $comuna = Comuna::find($id);
-
-        if (!$comuna) {
-            return response()->json(['message' => 'Comuna no encontrada'], 404);
-        }
-
-        $comuna->update([
-            'comu_nomb' => $request->name,
-            'muni_codi' => $request->code,
-        ]);
-
-        return response()->json($comuna);
+        $comuna->comu_nomb = $request->name;
+        $comuna->muni_codi = $request->muni_codi;
+        $comuna->save();
+        return json_encode(['comuna'=>$comuna]);
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy( $id)
     {
         $comuna = Comuna::find($id);
-
-        if (!$comuna) {
-            return response()->json(['message' => 'Comuna no encontrada'], 404);
-        }
-
         $comuna->delete();
-
-        return response()->json(['message' => 'Comuna eliminada correctamente']);
+        $comunas = DB::table('tb_comuna')
+            ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
+            ->select('tb_comuna.comu_codi', 'tb_comuna.comu_nomb', 'tb_municipio.muni_nomb')
+            ->get();
+            return json_encode(['comunas'=>$comunas, 'success'=>true]);
     }
 }

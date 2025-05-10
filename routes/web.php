@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoriesController::class);
     
     Route::resource('comunas', ComunaController::class);
-    Route::get('/comunas', [ComunaController::class, 'index'])->name ('comunas');
+    
     Route::get('/comunas', [ComunaController::class, 'index'])->name('comunas.index');
 
 
