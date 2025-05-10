@@ -16,7 +16,7 @@ class ComunaController extends Controller
     {
         $comunas = DB::table('tb_comuna')
             ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
-            ->select('tb_comuna.comu_codi', 'tb_comuna.comu_nomb', 'tb_municipio.muni_nomb')
+            ->select('tb_comuna.*', 'tb_municipio.muni_nomb')
             ->get();
 
         return json_encode(['comunas'=>$comunas]);
@@ -42,7 +42,7 @@ class ComunaController extends Controller
     {
         $comuna = Comuna::find($id);
         $municipios = DB::table('tb_municipio')
-        ->ordeBy('muni_nomb')
+        ->orderBy('muni_nomb')
         ->get ();
         return json_encode(['comuna'=>$comuna, 'municiopios'=>$municipios]);
     }

@@ -7,9 +7,13 @@ use Illuminate\Support\Facades\Route;
 
 // Esta es la ruta correcta para acceder a las API
 
-Route::get('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 //Route::apiResource('comunas', ComunaController::class);
 Route::get('/comunas', [ComunaController::class, 'index'])->name ('comunas');
+
+Route::get('/prueba', function () {
+    return 'Funciona';
+});
