@@ -5,7 +5,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ComunaController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomersController;
-use App\Http\Controllers\InvoiveController;
+use App\Http\Controllers\InvoiceController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -30,9 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('comunas', ComunaController::class);
     
     Route::get('/comunas', [ComunaController::class, 'index'])->name('comunas.index');
-
-    Route::resource('invoices', InvoiveController::class);
     Route::resource('customers',CustomersController::class);
+    Route::resource('invoices', InvoiceController::class);
+
+ 
 
     Route::resource('products', ProductController::class);
 
