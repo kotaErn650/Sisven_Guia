@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Comuna extends Model
 {
     use HasFactory;
+
     protected $table = 'tb_comuna';
     protected $primaryKey = 'comu_codi';
-    public $timestamps = false; 
+    public $timestamps = false;
+
+    // Asignación masiva segura
+    protected $fillable = ['comu_nomb', 'muni_codi'];
 }
