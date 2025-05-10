@@ -11,17 +11,44 @@
                 </div>
 
                 <!-- Navigation Links -->
+                <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('comunas.index')" :active="request()->routeIs('comunas.index')">
-                        {{ __('Comunas') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
-                        {{ __('Categorias') }}
-                    </x-nav-link>
+                    <!-- Opción de Dashboard (visible para Admin y Cliente) -->
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cliente')
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    @endif
+
+                    <!-- Opción de Products (visible para Admin y Vendedor) -->
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'vendedor')
+                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+                            {{ __('Products') }}
+                        </x-nav-link>
+                    @endif
+
+                    <!-- Opción de Categories (visible solo para Admin) -->
+                    @if(Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                            {{ __('Categories') }}
+                        </x-nav-link>
+                    @endif
+
+                    <!-- Opción de Customers (visible para Admin, Cliente y Vendedor) -->
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cliente' || Auth::user()->role === 'vendedor')
+                        <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
+                            {{ __('Customers') }}
+                        </x-nav-link>
+                    @endif
+
+                    <!-- Opción de Invoices (visible solo para Admin) -->
+                    @if(Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('invoices.index')" :active="request()->routeIs('invoices.*')">
+                            {{ __('Invoices') }}
+                        </x-nav-link>
+                    @endif
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->

@@ -3,6 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ComunaController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\InvoiveController;
+
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,11 +23,19 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+
     Route::resource('categories', CategoriesController::class);
     
     Route::resource('comunas', ComunaController::class);
     
     Route::get('/comunas', [ComunaController::class, 'index'])->name('comunas.index');
+
+    Route::resource('invoices', InvoiveController::class);
+    Route::resource('customers',CustomersController::class);
+
+    Route::resource('products', ProductController::class);
+
 
 
 });
