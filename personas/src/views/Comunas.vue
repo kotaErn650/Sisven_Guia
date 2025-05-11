@@ -37,7 +37,7 @@ export default {
 
 mounted() {
     axios
-    .get('http://127.0.0.1:8000/api/comunas')
+    .get('http://localhost:8080/api/comunas')
     .then(response => (this.comunas = response.data.comunas))
 },
 }

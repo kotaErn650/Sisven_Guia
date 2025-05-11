@@ -13,6 +13,7 @@ const routes = [
     name :'Comunas',
     component: Comunas
   },
+  
   {
     path: '/about',
     name: 'about',
