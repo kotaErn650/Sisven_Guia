@@ -11,7 +11,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 //Route::apiResource('comunas', ComunaController::class);
+Route::get('comunas', [ComunaController::class, 'index']);
 Route::get('/comunas', [ComunaController::class, 'index'])->name ('comunas');
 
 Route::get('/prueba', function () {
