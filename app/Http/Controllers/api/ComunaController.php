@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+
+use App\Http\Controller\Controller;
 use App\Models\Comuna;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +17,12 @@ class ComunaController extends Controller
      */
     public function index()
     {
-        //$comunas = Comuna::all();
-        $comunas = DB::table('tb_comuna')
-            ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
-            ->select('tb_comuna.comu_codi', 'tb_comuna.comu_nomb', 'tb_municipio.muni_nomb')
-            ->get();
-        return view('comuna.index', ['comunas' => $comunas]);
+        $comunas = DB::table ('tb_comuna')
+        ->join('tb_municipio', 'tb_comuna.muni_codi', '=', tb_municipio.muni_codi)
+        ->select('tb_comuna.*', "tb_municipio.muni.nomb")
+        ->get();
+
+        return json_decode(['comunas'=>$comunas]);
     }
 
     /**
