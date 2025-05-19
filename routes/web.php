@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ComunaController;
+use App\Http\Controllers\MunicipiController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Middleware\CheckRole;
 
@@ -44,9 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoriesController::class)
         ->middleware(CheckRole::class . ':admin');
 
-    Route::resource('comunas', ComunaController::class);
+   
 
-    Route::get('/comunas', [ComunaController::class, 'index'])->name('comunas.index');
+
 
     Route::get('/invoices', [InvoiceController::class, 'index'])
         ->middleware(CheckRole::class . ':admin')
@@ -54,6 +55,26 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('invoices', InvoiceController::class)
         ->middleware(CheckRole::class . ':admin');
+
+
+
+        Route::resource('comunas', ComunaController::class)
+            ->names([
+                'index' => 'comunas.index',
+                'create' => 'comunas.create',
+                'store' => 'comunas.store',
+                'show' => 'comunas.show',
+                'edit' => 'comunas.edit',
+                'update' => 'comunas.update',
+                'destroy' => 'comunas.destroy'
+            ]);
+
+
+
+
+
+
+
 });
 
 require __DIR__.'/auth.php';

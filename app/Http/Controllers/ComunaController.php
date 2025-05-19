@@ -13,16 +13,15 @@ class ComunaController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //$comunas = Comuna::all();
-        $comunas = DB::table('tb_comuna')
-            ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
-            ->select('tb_comuna.comu_codi', 'tb_comuna.comu_nomb', 'tb_municipio.muni_nomb')
-            ->get();
-        return view('comuna.index', ['comunas' => $comunas]);
-    }
-
+public function index()
+{
+    $comunas = DB::table('tb_comuna')
+        ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
+        ->select('tb_comuna.comu_codi', 'tb_comuna.comu_nomb', 'tb_municipio.muni_nomb')
+        ->get();
+        
+    return view('comunas.index', ['comunas' => $comunas]); 
+}
     /**
      * Show the form for creating a new resource.
      * 
@@ -33,7 +32,7 @@ class ComunaController extends Controller
         $municipios = DB::table('tb_municipio')
             ->orderBy('muni_nomb')
             ->get();
-            return view('comuna.create', ['municipios' => $municipios]);
+            return view('comunas.create', ['municipios' => $municipios]);
     }
 
     /**
@@ -55,7 +54,7 @@ class ComunaController extends Controller
             ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
             ->select('tb_comuna.*',  'tb_municipio.muni_nomb')
             ->get();
-        return view('comuna.index', ['comunas' => $comunas]);
+        return view('comunas.index', ['comunas' => $comunas]);
     }
 
     /**
@@ -78,7 +77,7 @@ class ComunaController extends Controller
         $municipios = DB::table('tb_municipio')
             ->orderBy('muni_nomb')
             ->get();
-        return view('comuna.edit', ['comuna' => $comuna, 'municipios' => $municipios]);
+        return view('comunas.edit', ['comuna' => $comuna, 'municipios' => $municipios]);
     }
 
     /**
@@ -99,7 +98,7 @@ class ComunaController extends Controller
             ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
             ->select('tb_comuna.*', 'tb_municipio.muni_nomb')
             ->get();
-        return view('comuna.index', ['comunas' => $comunas]);
+        return view('comunas.index', ['comunas' => $comunas]);
     }
 
     /**
@@ -118,6 +117,6 @@ class ComunaController extends Controller
         ->select('tb_comuna.*', 'tb_municipio.muni_nomb')
         ->get();
 
-        return view('comuna.index', ['comunas' => $comunas]);
+        return view('comunas.index', ['comunas' => $comunas]);
     }
 }

@@ -18,6 +18,9 @@
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('comunas.index')" :active="request()->routeIs('dashboard')">
+                            {{ __('Comuna') }}
+                        </x-nav-link>
                     @endif
 
                     <!-- Opción de Products (visible para Admin y Vendedor) -->
